@@ -1,0 +1,114 @@
+# ============================================================
+# REMOTION AI EDITOR — GitHub Actions Render Pipeline
+# ============================================================
+# Triggers: push to main, manual dispatch, or on new release
+# Renders selected composition and uploads as artifact.
+# ============================================================
+
+name: Render Video
+
+on:
+  # Manual trigger with template selection
+  workflow_dispatch:
+    inputs:
+      template:
+        description: 'Template to render'
+        required: true
+        default: 'youtube'
+        type: choice
+        options:
+          - youtube
+          - shorts
+          - instagram
+          - client
+          - all
+      quality:
+        description: 'Render quality'
+        required: false
+        default: 'high'
+        type: choice
+        options:
+          - low
+          - medium
+          - high
+          - lossless
+      props_json:
+        description: 'Props JSON (override defaultProps). Leave empty to use defaults.'
+        required: false
+        default: ''
+
+  # Auto-render on push to main (renders youtube template by default)
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'projects/**'
+
+jobs:
+  render:
+    name: Render - ${{ github.event.inputs.template || 'youtube' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Install Linux dependencies required by Remotion's headless Chrome
+      - name: Install Remotion Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libx11-xcb1 libxcb-dri3-0 libxcomposite1 libxcursor1 libxdamage1 \
+            libxi6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libasound2 \
+            libpangocairo-1.0-0 libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0 \
+            libgbm1 libdrm2
+
+      # Write props to file if provided
+      - name: Write custom props
+        if: ${{ github.event.inputs.props_json != '' }}
+        run: |
+          echo '${{ github.event.inputs.props_json }}' > /tmp/custom-props.json
+
+      - name: Render video
+        run: |
+          TEMPLATE="${{ github.event.inputs.template || 'youtube' }}"
+          QUALITY="${{ github.event.inputs.quality || 'high' }}"
+          
+          if [ -f /tmp/custom-props.json ]; then
+            node scripts/render.mjs --template "$TEMPLATE" --quality "$QUALITY" --props /tmp/custom-props.json
+          else
+            node scripts/render.mjs --template "$TEMPLATE" --quality "$QUALITY"
+          fi
+
+      - name: Upload rendered videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-videos-${{ github.run_id }}
+          path: out/
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Comment render summary
+        if: always()
+        run: |
+          echo "## 🎬 Render Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Template:** ${{ github.event.inputs.template || 'youtube' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Quality:** ${{ github.event.inputs.quality || 'high' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -d out ]; then
+            echo "**Output files:**" >> $GITHUB_STEP_SUMMARY
+            ls -lh out/ | awk '{print "- " $NF " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || true
+          fi
