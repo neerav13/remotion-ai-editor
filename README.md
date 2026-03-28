@@ -1,59 +1,79 @@
-{
-  "_comment": "Example YouTube video project. Copy this file to create a new project.",
-  "_template": "YouTubeVideo",
-  "_renderCommand": "node scripts/render.mjs --template youtube --props projects/example.json",
+# Remotion AI Editor
 
-  "title": "How to Build an AI Video Editing Workflow",
-  "creator": "Your Channel Name",
+Professional AI-powered video editing workflow using Remotion + Claude Code.
 
-  "accentColor": "#FF6B35",
-  "showIntro": true,
-  "showOutro": true,
-  "introDuration": 90,
-  "outroDuration": 150,
-  "ctaText": "Subscribe for more AI tutorials!",
-  "musicVolume": 0.12,
+Edit, automate, and render professional videos entirely through Claude Code — no manual editing software needed. Supports YouTube (16:9), Shorts/TikTok (9:16), Instagram Reels (4:5), and fully branded client videos.
 
-  "scenes": [
-    {
-      "src": "./public/clips/hook.mp4",
-      "durationInFrames": 90,
-      "label": "Hook"
-    },
-    {
-      "src": "./public/clips/intro.mp4",
-      "durationInFrames": 180,
-      "label": "Introduction"
-    },
-    {
-      "src": "./public/clips/section1.mp4",
-      "durationInFrames": 300,
-      "label": "Setting Up Remotion",
-      "volume": 0.9
-    },
-    {
-      "src": "./public/clips/section2.mp4",
-      "durationInFrames": 420,
-      "label": "Building Compositions"
-    },
-    {
-      "src": "./public/clips/section3.mp4",
-      "durationInFrames": 360,
-      "label": "Automating with Claude Code"
-    },
-    {
-      "src": "./public/clips/outro.mp4",
-      "durationInFrames": 120
-    }
-  ],
+## Quick Start
 
-  "captions": [
-    { "text": "What if AI could edit your videos?", "from": 0, "to": 60 },
-    { "text": "Today we're building the full automated workflow.", "from": 60, "to": 120 },
-    { "text": "Let me show you exactly how to set this up.", "from": 180, "to": 240 },
-    { "text": "First, install Remotion with npx create-video@latest", "from": 270, "to": 360 },
-    { "text": "Then run 'npm run dev' to start the preview.", "from": 360, "to": 420 },
-    { "text": "Now open Claude Code in the project folder.", "from": 810, "to": 900 },
-    { "text": "Prompt Claude to create any composition you need.", "from": 900, "to": 990 }
-  ]
-}
+### 1. Clone and install
+git clone https://github.com/neerav13/remotion-ai-editor.git
+cd remotion-ai-editor
+npm install
+
+### 2. Install Remotion AI Skills
+npx skills add remotion-dev/skills
+
+### 3. Add your media to public/clips/, public/audio/, public/images/
+
+### 4. Preview
+npm run dev
+
+### 5. Start Claude Code
+claude
+
+## Prompting Claude Code
+
+Claude Code reads CLAUDE.md automatically. Examples:
+
+"Create a YouTube video with clip1.mp4 as hook (3s), clip2.mp4 as main content (2 min). Brand color #FF6B35."
+
+"Add word-by-word TikTok captions to the shorts video"
+
+"Make a client video for TechCorp with brand color #1A73E8 and DRAFT watermark"
+
+"Render the YouTube video in high quality"
+
+## Video Templates
+
+- YouTubeVideo: 16:9, 1920x1080 - Long-form YouTube content
+- ShortsVideo: 9:16, 1080x1920 - YouTube Shorts, TikTok, Reels
+- InstagramReel: 4:5, 1080x1350 - Instagram Feed and Reels
+- ClientVideo: 16:9, 1920x1080 - Client deliverables, branded content
+
+## Render Commands
+
+npm run render:youtube
+npm run render:shorts
+npm run render:instagram
+npm run render:client
+node scripts/render.mjs --template youtube --props projects/my-video.json
+node scripts/render.mjs --template all --quality lossless
+
+## Project Files
+
+Define videos as JSON in projects/. See projects/example.json for a full working example.
+
+## GitHub Actions
+
+Trigger renders in the cloud: Actions tab > Render Video > Run workflow. Download from artifacts.
+
+## Components
+
+- IntroCard: Animated opening title card
+- OutroCard: End screen with CTA button
+- LowerThird: News-style sliding name bar
+- CaptionTrack: Subtitle overlay
+- WordByWordCaption: TikTok-style word captions
+- AnimatedTitle: Full-screen title animation
+- TransitionOverlay: Scene transitions (dip-black, dip-white, flash)
+- Watermark: Draft/client watermark
+- CallToAction: Animated CTA overlay
+
+## Resources
+
+- Remotion Docs: https://remotion.dev/docs
+- Claude Code AI Prompting: https://remotion.dev/docs/ai/claude-code
+- Agent Skills: https://remotion.dev/docs/ai/skills
+
+MIT License
