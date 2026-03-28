@@ -1,0 +1,121 @@
+{
+  "_comment": "STYLE_GUIDE.json — Remotion AI Editor style replication schema. Claude Code reads this file when editing to match the user's established editing style. Populate by analysing a reference video, then Claude Code applies every field automatically on all subsequent edits.",
+
+  "meta": {
+    "sourceName": "",
+    "sourceFile": "",
+    "analysedAt": "",
+    "notes": ""
+  },
+
+  "pacing": {
+    "style": "medium",
+    "_options": ["slow", "medium", "fast", "very-fast"],
+    "averageCutDuration": 4.0,
+    "_averageCutDurationNote": "seconds per clip before cutting. slow=6+, medium=3-6, fast=1.5-3, very-fast=0.5-1.5"
+  },
+
+  "transitions": {
+    "type": "cut",
+    "_options": ["cut", "glitch", "dip-black", "dip-white", "flash", "cross-dissolve"],
+    "durationFrames": 0,
+    "_durationFramesNote": "0 for hard cut, 10-20 for dissolves or glitch"
+  },
+
+  "captions": {
+    "enabled": true,
+    "style": "word-by-word",
+    "_styleOptions": ["word-by-word", "line-by-line", "none"],
+    "font": "Inter",
+    "fontSize": 52,
+    "fontWeight": "800",
+    "color": "#FFFFFF",
+    "backgroundColor": "rgba(0,0,0,0.6)",
+    "backgroundPadding": "8px 16px",
+    "borderRadius": 8,
+    "position": "bottom-center",
+    "_positionOptions": ["bottom-center", "top-center", "center", "bottom-left"],
+    "maxWordsPerLine": 4,
+    "wordsPerSecond": 2.5,
+    "_wordsPerSecondNote": "how fast captions appear. typical speech = 2.0-2.5"
+  },
+
+  "lowerThird": {
+    "show": true,
+    "position": "bottom-left",
+    "showAtFrame": 30,
+    "_showAtFrameNote": "frame to show lower third after clip starts",
+    "durationFrames": 150,
+    "_durationFramesNote": "how long lower third stays on screen (150 = 5 seconds)",
+    "nameFont": "Inter",
+    "nameFontSize": 32,
+    "nameFontWeight": "700",
+    "titleFont": "Inter",
+    "titleFontSize": 22,
+    "titleFontWeight": "400",
+    "barColor": "#FF6B35",
+    "_barColorNote": "accent bar color, usually brandColor"
+  },
+
+  "colorPalette": {
+    "primary": "#FF6B35",
+    "_primaryNote": "main brand color — used for accents, bars, highlights",
+    "secondary": "#1A1A2E",
+    "_secondaryNote": "secondary brand color",
+    "accent": "#FFD700",
+    "_accentNote": "highlight color for stats, counters, key text",
+    "background": "#0A0A0A",
+    "_backgroundNote": "background for motion graphics slides",
+    "text": "#FFFFFF",
+    "_textNote": "primary text color"
+  },
+
+  "audioMix": {
+    "musicLevel": 0.12,
+    "_musicLevelNote": "0-1. Subtle background music = 0.08-0.15",
+    "voiceLevel": 1.0,
+    "_voiceLevelNote": "0-1. Usually 1.0 for main speech",
+    "fadeInDuration": 30,
+    "_fadeInDurationNote": "frames to fade in music at start",
+    "fadeOutDuration": 60,
+    "_fadeOutDurationNote": "frames to fade out music at end"
+  },
+
+  "motionIntensity": 0.6,
+  "_motionIntensityNote": "0-1. Controls spring animation mass and damping. 0=very gentle, 1=snappy/bouncy",
+
+  "zoomStyle": {
+    "usePunchIn": true,
+    "_usePunchInNote": "whether to zoom into clips for emphasis",
+    "zoomScale": 1.08,
+    "_zoomScaleNote": "how much to punch in. 1.0=no zoom, 1.05-1.15=subtle, 1.2+=dramatic",
+    "zoomDuration": 20,
+    "_zoomDurationNote": "frames to animate zoom transition"
+  },
+
+  "textOverlays": {
+    "frequency": 0.5,
+    "_frequencyNote": "0=never, 0.5=half of clips get text, 1=every clip gets text",
+    "position": "center",
+    "_positionOptions": ["top", "center", "bottom"],
+    "style": "kinetic",
+    "_styleOptions": ["kinetic", "simple", "bold-card", "minimal"]
+  },
+
+  "bRollStyle": {
+    "filterPreset": "none",
+    "_filterOptions": ["none", "warm", "cool", "bw", "cinematic"],
+    "beatSyncCuts": true,
+    "_beatSyncCutsNote": "whether to snap cuts to audio beat markers"
+  },
+
+  "introOutro": {
+    "showIntro": true,
+    "introDurationFrames": 90,
+    "_introDurationFramesNote": "90 = 3 seconds",
+    "showOutro": true,
+    "outroDurationFrames": 150,
+    "_outroDurationFramesNote": "150 = 5 seconds",
+    "outroCtaText": "Subscribe for more"
+  }
+}
