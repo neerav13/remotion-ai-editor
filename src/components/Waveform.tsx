@@ -45,7 +45,7 @@ export const Waveform: React.FC<WaveformProps> = ({
       frame,
       audioData,
       numberOfSamples,
-      smoothing,
+      smoothing: smoothing > 0.5,
     });
   } else {
     // Fallback animation while audio loads

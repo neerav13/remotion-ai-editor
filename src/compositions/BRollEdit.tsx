@@ -7,7 +7,7 @@ import { TransitionOverlay } from '../components/TransitionOverlay';
 import { GlitchTransition } from '../components/GlitchTransition';
 import { ZoomCut } from '../components/ZoomCut';
 import { ColorGrade } from '../components/ColorGrade';
-import { BeatText } from '../components/BeatText';
+import { BeatText } from '../components/UIComponents';
 import { WordByWordCaption } from '../components/WordByWordCaption';
 import { CaptionTrack } from '../components/CaptionTrack';
 import { KineticText } from '../components/KineticText';
@@ -150,10 +150,10 @@ export const BRollEdit: React.FC<BRollEditProps> = ({
 
       {/* BEAT FLASHES */}
       {flashOnBeat && beatMoments.map((beat, i) => (
-        <Sequence key={`beat-${i}`} from={beat.from} durationInFrames={6}>
+        <Sequence key={`beat-${i}`} from={beat.frame} durationInFrames={6}>
           <AbsoluteFill style={{
             backgroundColor: flashColor ?? '#ffffff',
-            opacity: interpolate(frame - beat.from, [0, 3, 6], [0.6, 0.3, 0], {
+            opacity: interpolate(frame - beat.frame, [0, 3, 6], [0.6, 0.3, 0], {
               extrapolateLeft: 'clamp',
               extrapolateRight: 'clamp',
             }),
@@ -164,7 +164,7 @@ export const BRollEdit: React.FC<BRollEditProps> = ({
 
       {/* BEAT TEXT */}
       {beatMoments.filter(b => b.text).map((beat, i) => (
-        <Sequence key={`beattext-${i}`} from={beat.from} durationInFrames={30}>
+        <Sequence key={`beattext-${i}`} from={beat.frame} durationInFrames={30}>
           <BeatText text={beat.text!} accentColor={accentColor} />
         </Sequence>
       ))}

@@ -6,9 +6,7 @@ import {
 import { CaptionTrack } from '../components/CaptionTrack';
 import { WordByWordCaption } from '../components/WordByWordCaption';
 import { LowerThird } from '../components/LowerThird';
-import { ChapterMarker } from '../components/ChapterMarker';
-import { ProgressBar } from '../components/ProgressBar';
-import { PictureInPicture } from '../components/PictureInPicture';
+import { ChapterMarker, ProgressBar, PictureInPicture } from '../components/UIComponents';
 import { ColorGrade } from '../components/ColorGrade';
 import { ZoomCut } from '../components/ZoomCut';
 import { IntroCard } from '../components/IntroCard';

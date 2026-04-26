@@ -5,10 +5,8 @@ import {
 } from 'remotion';
 import { Waveform } from '../components/Waveform';
 import { WordByWordCaption } from '../components/WordByWordCaption';
-import { QuoteCard } from '../components/QuoteCard';
-import { SplitScreen } from '../components/SplitScreen';
+import { QuoteCard, SplitScreen, ProgressBar } from '../components/UIComponents';
 import { ColorGrade } from '../components/ColorGrade';
-import { ProgressBar } from '../components/ProgressBar';
 
 // ============================================================
 // PodcastClip Composition
@@ -67,7 +65,7 @@ export const defaultPodcastClipProps: PodcastClipProps = {
   wordCaptions: [],
   quoteMoments: [
     {
-      text: '"The most powerful thing you can do is start before you're ready."',
+      text: "\"The most powerful thing you can do is start before you're ready.\"",
       speaker: 'Guest Name',
       from: 0,
       durationInFrames: 120,

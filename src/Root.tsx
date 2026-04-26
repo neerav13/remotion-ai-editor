@@ -1,11 +1,13 @@
+import React from 'react';
 import { Composition } from 'remotion';
+import { RetentionMotionGraphic } from './compositions/RetentionMotionGraphic';
 import { YouTubeVideo, defaultYouTubeProps } from './compositions/YouTubeVideo';
 import { ShortsVideo, defaultShortsProps } from './compositions/ShortsVideo';
 import { InstagramReel, defaultInstagramProps } from './compositions/InstagramReel';
 import { ClientVideo, defaultClientProps } from './compositions/ClientVideo';
 import { TalkingHead, defaultTalkingHeadProps } from './compositions/TalkingHead';
-import { PodcastClip, defaultPodcastProps } from './compositions/PodcastClip';
-import { BRollEdit, defaultBRollProps } from './compositions/BRollEdit';
+import { PodcastClip, defaultPodcastClipProps } from './compositions/PodcastClip';
+import { BRollEdit, defaultBRollEditProps } from './compositions/BRollEdit';
 import { MotionGraphics, defaultMotionGraphicsProps } from './compositions/MotionGraphics';
 
 // ============================================================
@@ -85,7 +87,7 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
-        defaultProps={defaultPodcastProps}
+        defaultProps={defaultPodcastClipProps}
       />
 
       {/* Fast-paced b-roll montage (beat-synced cuts) */}
@@ -96,7 +98,7 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
-        defaultProps={defaultBRollProps}
+        defaultProps={defaultBRollEditProps}
       />
 
       {/* Animated motion graphics / explainer / data visualization */}
@@ -108,6 +110,16 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={defaultMotionGraphicsProps}
+      />
+
+      {/* Retention motion graphic — 25 s vertical (9:16, 1080×1920) */}
+      <Composition
+        id="RetentionMotionGraphic"
+        component={RetentionMotionGraphic}
+        durationInFrames={750}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );

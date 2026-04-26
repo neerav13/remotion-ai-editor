@@ -7,7 +7,7 @@ import { KineticText } from '../components/KineticText';
 import { AnimatedCounter } from '../components/AnimatedCounter';
 import { AnimatedTitle } from '../components/AnimatedTitle';
 import { ColorGrade } from '../components/ColorGrade';
-import { ShapeReveal } from '../components/ShapeReveal';
+import { ShapeReveal } from '../components/UIComponents';
 
 // ============================================================
 // MotionGraphics Composition
